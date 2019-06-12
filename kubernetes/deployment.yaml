@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hpa-dm
+  namespace: hpa-sample
+spec:
+  selector:
+    matchLabels:
+      app: hpa-service
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hpa-service
+    spec:
+      containers:
+        - name: hpa-service
+          image: local-dtr.com/kubernetes-hpa-sample:Develop
+          ports:
+            - containerPort: 8080
+              name: http
+          resources:
+            limits:
+              cpu: 200m
+            requests:
+              cpu: 101m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hpa-service-svc
+  namespace: hpa-sample
+spec:
+  ports:
+    - port: 8880
+      protocol: TCP
+      targetPort: http
+  selector:
+    app: hpa-service
+  sessionAffinity: None
+  type: LoadBalancer
