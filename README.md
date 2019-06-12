@@ -131,3 +131,8 @@ In addition to using the HPA functionality on the command line, it can also be d
 ```bash
 $ kubectl apply -f ./kubernetes/hpa/hpa.yaml
 ```
+
+# Cleanup
+```bash
+$ kubectl delete namespace hpa-sample
+```
