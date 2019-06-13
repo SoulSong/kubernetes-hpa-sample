@@ -75,7 +75,7 @@ Execute `kubectl autoscale **` command as follows:
 ```bash
 $ kubectl autoscale deployment hpa-dm --min=2 --max=5 --cpu-percent=15 -n hpa-sample
 ```
-At the same time, open more screens to monitor the status of the deployment and events.
+At the same time, open multiple screens to monitor the status of the deployment and events.
 ```bash
 $ kubectl get events -n hpa-sample -w
 LAST SEEN   TYPE     REASON                  OBJECT                         MESSAGE
@@ -90,7 +90,7 @@ LAST SEEN   TYPE     REASON                  OBJECT                         MESS
 1s          Normal   SuccessfulDelete        replicaset/hpa-dm-69cb57c8d4     Deleted pod: hpa-dm-69cb57c8d4-gxgf8
 0s          Normal   Killing                 pod/hpa-dm-69cb57c8d4-gxgf8      Killing container with id docker://hpa-service:Need to kill Pod
 ```
-The last four lines show that the `horizontalpodautoscaler` trigger the auto scale capacity.
+The last four lines show that the `horizontalpodautoscaler` triggered the auto scale capacity.
 ```bash
 $ kubectl get deployment hpa-dm -n hpa-sample -w
 NAME     READY   UP-TO-DATE   AVAILABLE   AGE
@@ -99,8 +99,8 @@ hpa-dm   3/2     3            3           28m
 hpa-dm   3/2     3            3           28m
 hpa-dm   2/2     2            2           28m
 ```
-At last there are 2 available pods after finishing the auto scale.
-View the change of the hpa, output shows the metrics value which it is monitoring.
+Final there are 2 available pods after finishing the auto scale.
+View the change of the hpa, the output shows the metrics value which it is monitoring.
 ```bash
 $ kubectl get hpa  -w -n  hpa-sample
 NAME     REFERENCE           TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
@@ -108,7 +108,7 @@ hpa-dm   Deployment/hpa-dm   <unknown>/15%   2         5         0          0s
 hpa-dm   Deployment/hpa-dm   1%/15%          2         5         3          30s
 hpa-dm   Deployment/hpa-dm   1%/15%          2         5         2          60s
 ```
-Through `kubectl get hpa -o yaml -n hpa-sample`, it will show how the hpa defined.
+Through the `kubectl get hpa -o yaml -n hpa-sample` command, it will show how the hpa defined.
 ```yaml
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
